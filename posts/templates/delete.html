@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<form action="" method="post" style="width: 50%; margin: auto;">
+    <h1 class="mt-5">Are you sure you want to delete</h1>
+    {% csrf_token %}
+
+    {{form | crispy}}
+
+    <!-- {% for fm in form %}
+    {{fm.label_tag}}
+    {{fm}}
+    {{fm.errors}}
+    {% endfor %}  -->
+
+    <button class="btn btn-primary">Delete</button>
+</form>
+{% endblock %}

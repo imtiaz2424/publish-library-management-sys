@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+{% if form.non_field_errors %} {% for error in form.non_field_errors %}
+<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-2" role="alert">
+    <p class="font-bold">Error!</p>
+    <p class="block sm:inline">{{ error }}</p>
+</div>
+{% endfor %} {% endif %} {% if form.non_field_errors %} {% for error in form.non_field_errors %}
+<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-2" role="alert">
+    <p class="font-bold">Error!</p>
+    <p class="block sm:inline">{{ error }}</p>
+</div>
+{% endfor %} {% endif %}
+
+<div class="bg-white px-3 py-4 rounded-xl my-6">
+    <h1 class="font-bold text-3xl text-center">Change Your Password From Here</h1>
+    <div class="w-full mt-3">
+        <form action="" method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-2" style="width: 50%; margin: auto;">       
+           
+            {% csrf_token %} {% for hidden_field in form.hidden_fields %} {{ hidden_field.errors }} {{ hidden_field }} {% endfor %}
+        
+            
+                <!-- {{form | crispy}} -->        
+                {% for fm in form %}
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mt-3" for="{{ fm.id_for_label }}">
+                    {{fm.label_tag}}
+                </label>                
+                {{fm}}{% if fm.errors %}
+                
+                {% for error in fm.errors %}
+                <p class="text-red-600 text-sm italic pb-2">{{fm.errors}}</p>
+                {% endfor %} {% endif %}                
+                {% endfor %} 
+            
+
+            <br>
+        
+            <button class="btn btn-primary mb-5">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

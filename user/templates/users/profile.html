@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block head_title %}Library Management System{% endblock %} 
+
+{% block content %}
+
+<div class="container mt-4">
+    <a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit Your Profile</a>
+    <a href="{% url 'transaction_report' %}" class="btn btn-primary mx-3">View Your Borrowing Report</a>
+</div>
+
+
+
+
+
+<div class="d-flex flex-wrap justify-content-center px-5 pt-5">
+     
+    {% for order in orders %}
+    <div class="col-sm-3 mb-3">
+        <div class="card mx-2 h-100">
+          <div class="card-body">
+              <img src="{{order.post.image.url}}" class="card-img-top" alt="...">                              
+              <h5>Name : <a href="{% url 'detail_post' order.post.id %}" class="text-decoration-none">{{order.post.title}}</a></h5>
+              <p>Price : {{order.post.book_price}}</p>           
+              <p>Category : 
+                {% for cat in order.post.category.all %}
+                <button class="btn btn-warning btn-sm m-1">{{cat.name}}</button>  
+                {% endfor %}
+              </p>
+              <a href="{% url 'detail_post' order.post.id %}" class="btn btn-primary">View Details</a>              
+            </div>            
+          </div>          
+    </div>
+    {% endfor %}         
+  </div> 
+{% endblock %}

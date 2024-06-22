@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+{% if form.non_field_errors %} {% for error in form.non_field_errors %}
+<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-2" role="alert">
+    <p class="font-bold">Error!</p>
+    <p class="block sm:inline">{{ error }}</p>
+</div>
+{% endfor %} {% endif %} {% if form.non_field_errors %} {% for error in form.non_field_errors %}
+<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-2" role="alert">
+    <p class="font-bold">Error!</p>
+    <p class="block sm:inline">{{ error }}</p>
+</div>
+{% endfor %} {% endif %}
+
+
+<div class="bg-white px-3 py-4 rounded-xl my-6">
+
+  <div class="d-flex flex-wrap px-5 mt-5">
+    <div class="w-full mt-3 col-6">
+      <img src="{{post.image.url}}" class="card-img-top image-fluid" alt="..." style="width: 100%;">
+    </div>
+      <div class="card col-6 w-full mt-3">
+        <div class="card-body">                       
+            <h4 class="font-bold text-4xl pb-3">{{post.title}}</h4> 
+            <h4 class="text-3xl pb-3">Price : {{post.book_price}}</h4>                     
+            <h4 class="text-3xl pb-3">Quantity : {{post.quantity}}</h4>                     
+            <p class="card-text text-2xl pb-3 text-justify">{{post.description}}</p>          
+            <p class="text-3xl pb-3">Category : 
+              {% for cat in post.category.all %}
+              <button class="btn btn-warning btn-sm m-1">{{cat.name}}</button>
+              {% endfor %}
+            </p>          
+            <!-- <h6 class="card-subtitle mb-2 text-muted">{{post.assign_date}}</h6> --> 
+             <!-- <p>Users: {{post.user.first_name}} {{post.user.last_name}}</p> -->
+             {% if request.user.is_authenticated %}        
+             <!-- <a href="{% url 'borrow_book' %}" class="btn btn-primary text-2xl">Buy Now</a> -->
+             <a href="{% url 'buy_now' post.id %}" class="btn btn-primary text-2xl">Borrow Book</a>
+             <a href="{% url 'return_book' post.id %}" class="btn btn-success text-2xl mx-3">Return Book</a>
+
+             {% endif %}
+                     
+          </div>
+      </div>
+  </div>
+</div>
+
+
+{% if request.user.is_authenticated %}
+
+
+<div class="bg-slate-300 px-3 py-4 rounded-xl my-6">
+  <h1 class="font-bold text-3xl text-center">Add Your Review</h1>
+  <div class="w-full mt-3">
+    <form action="" method="post" class="bg-orange-200 shadow-md rounded-xl px-8 pt-6 pb-8 mb-2" style="width: 50%; margin: auto;">        
+      {% csrf_token %} {% for hidden_field in form.hidden_fields %} {{ hidden_field.errors }} {{ hidden_field }} {% endfor %}
+       
+      {{ review_form | crispy }}             
+      <button class="btn btn-primary mb-5">Add</button>
+    </form>
+    </div>  
+</div>
+
+
+
+
+
+<div class="card bg-sky-600 px-3 py-4 rounded-xl my-6">
+  <h5 class="p-3 font-bold text-3xl text-indigo-50">Total Review: {{ reviews | length }}</h5>
+  {% for review in reviews %}
+  <div class="card-body bg-indigo-100 border m-2 w-full mt-3 rounded-xl">      
+    <p class="text-2xl"><b>{{ review.name }}</b> <span>{{ review.pub_date }}</span></p>
+    <p class="text-2xl">{{ review.comment }}</p>      
+  </div>
+  {% endfor %}
+</div>
+
+{% endif %}
+
+{% endblock %}

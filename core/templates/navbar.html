@@ -1,0 +1,55 @@
+<nav class="flex items-center justify-between flex-wrap bg-purple-300 p-6 px-10">
+    <div class="flex items-center flex-shrink-0 text-white">
+        <span class="font-semibold text-xl tracking-tight text-blue-900"><a href="/" class="hover:no-underline text-3xl">Guidener</a></span>
+    </div>
+    <div class="block lg:hidden">
+        <button class="flex items-center px-3 py-2 border rounded text-white border-white-400 hover:text-white hover:border-white">
+            <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+        </button>
+    </div>
+    
+    <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto px-10">
+        {% if request.user.is_authenticated %}
+            <div class="text-md lg:flex-grow hover:no-underline">
+                <a href="{% url 'transaction_report' %}" class="hover:no-underline block text-xl mt-4 lg:inline-block lg:mt-0 text-blue-900 hover:text-indigo-600 hover:font-black mr-4">
+                    Borrowing Report
+                </a>
+                <!-- <a href="{% url 'borrowing_history' %}" class="hover:no-underline block mt-4 lg:inline-block lg:mt-0 text-blue-900 hover:text-red-900 hover:font-black mr-4">
+                    Borrowing History Report
+                </a> -->
+                <a href="{% url 'deposit_money' %}" class="hover:no-underline block mt-4 text-xl lg:inline-block lg:mt-0 text-blue-900 hover:text-indigo-600 hover:font-black mr-4">
+                    Deposit
+                </a>
+                <!-- <a href="{% url 'withdraw_money' %}" class="hover:no-underline block text-xl mt-4 lg:inline-block lg:mt-0 text-blue-900 hover:text-indigo-600 hover:font-black mr-4">
+                    Withdraw
+                </a> -->
+                <!-- <a href="{% url 'borrow_book' %}" class="hover:no-underline block mt-4 text-xl lg:inline-block lg:mt-0 text-blue-900 hover:text-indigo-600 hover:font-black mr-4">
+                    Borrow
+                </a> -->
+                
+                <!-- <a href="{% url 'add_post' %}" class="hover:no-underline block mt-4 text-xl lg:inline-block lg:mt-0 text-blue-900 hover:text-indigo-600 hover:font-black mr-4">
+                    Add Post
+                </a> -->
+
+                <!-- <a href="{% url 'add_category' %}" class="hover:no-underline block mt-4 text-xl lg:inline-block lg:mt-0 text-blue-900 hover:text-indigo-600 hover:font-black mr-4">
+                    Add Category
+                </a> -->
+                
+            </div>
+            <div class="flex w-auto">
+                <div class="text-emerald-800 my-auto text-xl font-black px-5">Welcome, {{ request.user.first_name }} (balance : {{request.user.users.balance}}) </div>
+
+                <a href="{% url 'profile' %}" class="hover:no-underline mx-2 inline-block text-xl px-4 py-2 leading-none bg-blue-900 rounded-xl text-white border-white hover:border-transparent hover:text-white-800 hover:bg-amber-400 mt-4 lg:mt-0">Profile</a>
+                <a href="{% url 'user_logout' %}" class="hover:no-underline mx-2 inline-block text-xl px-4 py-2 leading-none bg-blue-900 rounded-xl text-white border-white hover:border-transparent hover:text-white-800 hover:bg-amber-400 mt-4 lg:mt-0">Logout</a>
+            </div>
+        {% else %}
+            <div class="text-md lg:flex-grow"></div>
+            <div>
+                <a href="{% url 'login' %}" class="hover:no-underline mr-2 inline-block text-xl font-medium text-sm px-4 py-2 leading-none bg-blue-900 rounded-xl text-white border-white hover:border-transparent hover:text-white-800 hover:bg-amber-400 mt-4 lg:mt-0">Login</a>
+            </div>
+            <div>
+                <a href="{% url 'register' %}" class="hover:no-underline inline-block text-xl font-medium text-sm px-4 py-2 leading-none bg-blue-900 rounded-xl text-white border-white hover:border-transparent hover:text-white-800 hover:bg-amber-400 mt-4 lg:mt-0">Register</a>
+            </div>
+        {% endif %}
+    </div>
+</nav>

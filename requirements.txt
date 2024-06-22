@@ -1,0 +1,16 @@
+asgiref
+beautifulsoup4
+crispy-bootstrap5
+distlib
+Django
+django-bootstrap-v5
+django-crispy-forms
+django-environ
+filelock
+mysql-connector-python
+pillow
+platformdirs
+soupsieve
+sqlparse
+tzdata
+virtualenv
