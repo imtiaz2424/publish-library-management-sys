@@ -14,3 +14,4 @@ soupsieve
 sqlparse
 tzdata
 virtualenv
+gunicorn
