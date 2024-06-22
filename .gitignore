@@ -1,1 +1,13 @@
 library_management_system/.env
+library_management_system/__pycache__/
+categories/__pycache__/
+categories/migrations/__pycache__/
+core/__pycache__/
+core/migrations/__pycache__/
+library_management_system/__pycache__/
+posts/__pycache__/
+posts/migrations/__pycache__/
+transactions/__pycache__/
+transactions/migrations/__pycache__/
+user/__pycache__/
+user/migrations/__pycache__/
